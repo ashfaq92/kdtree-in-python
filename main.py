@@ -83,9 +83,11 @@ def build_kdtree(points, depth=0):
     sorted_points = sorted(points, key=lambda point: point[axis])
 
     return {
-        'point': sorted_points[n / 2],
-        'left': build_kdtree(sorted_points[:n / 2], depth + 1),
-        'right': build_kdtree(sorted_points[n/2 + 1:], depth + 1)
+        # TypeError: list indices must be integers or slices, not float 
+        # To make this file compatible with python 3.7.4
+        'point': sorted_points[int(n / 2)],
+        'left': build_kdtree(sorted_points[:int(n / 2)], depth + 1),
+        'right': build_kdtree(sorted_points[int(n / 2 + 1):], depth + 1)
     }
 
 
